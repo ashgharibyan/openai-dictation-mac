@@ -1,0 +1,42 @@
+# XcodeGen spec. Requires full Xcode (not installed on this Mac when this was written, so
+# this file has not been built). Generate the project with:
+#   brew install xcodegen && xcodegen generate && open Dictate.xcodeproj
+name: Dictate
+options:
+  bundleIdPrefix: io.github.ashgharibyan
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+targets:
+  DictateCore:
+    type: framework
+    platform: macOS
+    sources: [Sources/DictateCore]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.ashgharibyan.dictate.core
+  Dictate:
+    type: application
+    platform: macOS
+    sources: [Sources/Dictate]
+    resources: [Packaging/AppIcon.icns]
+    dependencies:
+      - target: DictateCore
+      - sdk: Carbon.framework
+    settings:
+      base:
+        INFOPLIST_FILE: Packaging/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Packaging/Dictate.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.ashgharibyan.dictate
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Automatic
+  DictateCoreTests:
+    type: tool
+    platform: macOS
+    sources: [Sources/DictateCoreTests]
+    dependencies:
+      - target: DictateCore
