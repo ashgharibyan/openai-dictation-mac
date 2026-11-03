@@ -33,6 +33,6 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Dictate records your voice only while you hold or toggle the dictation shortcut, and sends the audio to OpenAI for transcription.</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Personal use.</string>
+	<string>Copyright © 2026 Ashot Gharibyan. MIT License.</string>
 </dict>
 </plist>
